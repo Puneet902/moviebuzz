@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moviebuzz</title>
+    <link rel="stylesheet" href="homepage.css">
+   
+   
+</head>
+<body>
+    <header>
+        <div class="logo">Movie<span>Buzz</span></div>
+        <input type="text" placeholder="Search for Movies, Events, Plays...">
+
+        <!-- Location Dropdown -->
+        <select class="location-select">
+            <option value="hyderabad">Hyderabad</option>
+            <option value="mumbai">Mumbai</option>
+            <option value="delhi">Delhi</option>
+            <option value="bangalore">Bangalore</option>
+        </select>
+       <a href="http://127.0.0.1:3000/sigin.html">
+        <button class="sign-in">Sign In</button> </a>
+
+        <!-- Menu Button -->
+        <button class="menu-btn">☰</button>
+
+        <!-- Dropdown Menu -->
+        <div class="menu-dropdown">
+            <ul>
+                <li><a href="#">Ordered Tickets</a></li>
+                <li><a href="#">Help Line</a></li>
+                <li><a href="#">Sign Out</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Smooth Scrolling Banner -->
+    <section class="banner">
+        <div class="banner-slider">
+            <div class="banner-track">
+>
+                <div class="banner-item">
+                    <img src="https://i.pinimg.com/736x/21/89/99/21899929d65fd9a1d9a5985a136377b7.jpg" alt="Banner 1">
+                    <div class="banner-info">
+                        <h2>Avengers: Endgame</h2>
+                        <h2 >Rent Movie</h2>
+                    </div>
+                </div>
+                <div class="banner-item">
+                    <img src="https://i.pinimg.com/736x/ad/fc/70/adfc70f15fa1bcb2647a40bb067b1668.jpg" alt="Banner 2">
+                    <div class="banner-info">
+                        <h2>The Batman</h2>
+                        <h2 >Rent Movie</h2>
+                    </div>
+                </div>
+                <div class="banner-item">
+                    <img src="https://i.pinimg.com/736x/52/fd/06/52fd0618cbe230bea6816fcb4f0f0444.jpg" alt="Banner 3">
+                    <div class="banner-info">
+                        <h2>Joker</h2>
+                        <h2 >Rent Movie</h2>
+                    </div>
+                </div>
+                <div class="banner-item">
+                    <img src="https://i.pinimg.com/736x/58/78/ba/5878baa061c4b4e73afe519399958b3f.jpg" alt="Banner 4">
+                    <div class="banner-info">
+                        <h2>Inception</h2>
+                        <h2 >Rent Movie</h2>
+                    </div>
+                </div>
+
+                <div class="banner-item">
+                    <img src="https://i.pinimg.com/736x/21/89/99/21899929d65fd9a1d9a5985a136377b7.jpg" alt="Banner 1">
+                    <div class="banner-info">
+                        <h2>Avengers: Endgame</h2>
+                        <h2 >Rent Movie</h2>
+                    </div>
+                </div>
+                <div class="banner-item">
+                    <img src="https://i.pinimg.com/736x/ad/fc/70/adfc70f15fa1bcb2647a40bb067b1668.jpg" alt="Banner 2">
+                    <div class="banner-info">
+                        <h2>THE BATMAN</h2>
+                        <h2 style=>Rent Movie</h2>
+                    </div>
+                </div>
+                <div class="banner-item">
+                    <img src="https://i.pinimg.com/736x/52/fd/06/52fd0618cbe230bea6816fcb4f0f0444.jpg" alt="Banner 3">
+                    <div class="banner-info">
+                        <h2>Joker</h2>
+                        <h2 >Rent Movie</h2>
+                    </div>
+                </div>
+                <div class="banner-item">
+                    <img src="https://i.pinimg.com/736x/58/78/ba/5878baa061c4b4e73afe519399958b3f.jpg" alt="Banner 4">
+                    <div class="banner-info">
+                        <h2>Inception</h2>
+                        <h2 style=>Rent Movie</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+    
+
+    <section class="movies">
+        <h2>Recommended Movies</h2>
+
+        <!-- Category Filter Buttons -->
+        <div class="category-buttons">
+            <button class="category-btn" data-category="all">All</button>
+            <button class="category-btn" data-category="action">Action</button>
+            <button class="category-btn" data-category="comedy">Comedy</button>
+            <button class="category-btn" data-category="thriller">Thriller</button>
+            <button class="category-btn" data-category="adventure">Adventure</button>
+        </div>
+
+        <!-- Movie List -->
+        <section class="scroll-container">
+        <button class="scroll-btn left-btn" onclick="scrollMovies(-1)">&#10094;</button>
+        <div class="movie-list" id="movieList">  
+            <div class="movie" data-category="action"><img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-image,i-discovery-catalog@@icons@@star-icon-202203010609.png,lx-24,ly-615,w-29,l-end:l-text,ie-OC44LzEwICA0Mi4xSyBWb3Rlcw%3D%3D,fs-29,co-FFFFFF,ly-612,lx-70,pa-8_0_0_0,l-end/et00384012-amntvfwlrl-portrait.jpg" alt="Action Movie"></div>
+            <div class="movie" data-category="comedy"><img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-image,i-discovery-catalog@@icons@@like_202006280402.png,lx-24,ly-617,w-29,l-end:l-text,ie-MjkuNksgTGlrZXM%3D,fs-29,co-FFFFFF,ly-612,lx-70,pa-8_0_0_0,l-end/et00430623-kzsrfjeeeb-portrait.jpg" alt="Comedy Movie"></div>
+            <div class="movie" data-category="comedy"><img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-image,i-discovery-catalog@@icons@@star-icon-202203010609.png,lx-24,ly-615,w-29,l-end:l-text,ie-OC45LzEwICA5NksgVm90ZXM%3D,fs-29,co-FFFFFF,ly-612,lx-70,pa-8_0_0_0,l-end/et00418119-qgzdzamyjy-portrait.jpg" alt="Comedy Movie"></div>
+            <div class="movie" data-category="adventure"><img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-image,i-discovery-catalog@@icons@@like_202006280402.png,lx-24,ly-617,w-29,l-end:l-text,ie-MS44SyBMaWtlcw%3D%3D,fs-29,co-FFFFFF,ly-612,lx-70,pa-8_0_0_0,l-end/et00433909-apdtyheusf-portrait.jpg" alt="Adventure Movie"></div>
+            <div class="movie" data-category="comedy"><img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-image,i-discovery-catalog@@icons@@star-icon-202203010609.png,lx-24,ly-615,w-29,l-end:l-text,ie-Ni45LzEwICAyLjFLIFZvdGVz,fs-29,co-FFFFFF,ly-612,lx-70,pa-8_0_0_0,l-end/et00403539-ngqfstcmyy-portrait.jpg" alt="Action Movie"></div>
+            <div class="movie" data-category="action"><img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-image,i-discovery-catalog@@icons@@star-icon-202203010609.png,lx-24,ly-615,w-29,l-end:l-text,ie-Ny8xMCAgOC4ySyBWb3Rlcw%3D%3D,fs-29,co-FFFFFF,ly-612,lx-70,pa-8_0_0_0,l-end/et00399765-lxpecsqysh-portrait.jpg" alt="Action Movie"></div>
+            <div class="movie" data-category="adventure"><img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-image,i-discovery-catalog@@icons@@star-icon-202203010609.png,lx-24,ly-615,w-29,l-end:l-text,ie-OC40LzEwICAyMi40SyBWb3Rlcw%3D%3D,fs-29,co-FFFFFF,ly-612,lx-70,pa-8_0_0_0,l-end/et00387901-dapdnkxxpt-portrait.jpg" alt="Action Movie"></div>
+            <div class="movie" data-category="action"><a href="http://127.0.0.1:3000/seet.html"><img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-MiwgT2N0IDIwMjU%3D,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00377351-zmmhehpuvp-portrait.jpg" alt="Action Movie"></a></div>
+            <div class="movie" data-category="action"><img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-MjMsIE1heSAyMDI1,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00419530-bkjspxtnhr-portrait.jpg" alt="Action Movie"></div>
+            <div class="movie" data-category="action"><img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-MjgsIE1hciAyMDI1,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00308207-uzkhshyusd-portrait.jpg" alt="Action Movie"></div>
+            <div class="movie" data-category="action"><img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-MTAsIEFwciAyMDI1,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00378770-acxkcynzcb-portrait.jpg" alt="Action Movie"></div>
+            <div class="movie" data-category="adventure"><img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-MTksIERlYyAyMDI1,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00407893-ttnuelxaxh-portrait.jpg" alt="Action Movie"></div>
+            <div class="movie" data-category="Comedy"><img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-MTAsIEFwciAyMDI1,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00383697-qwhwgzxwgh-portrait.jpg" alt="Action Movie"></div>
+            <div class="movie" data-category="thriller"><img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-MjUsIEFwciAyMDI1,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00429656-dkvtabbzzv-portrait.jpg" alt="Action Movie"></div>
+            <div class="movie" data-category="thriller"><img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-NCwgSnVsIDIwMjU%3D,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00432498-mxmmszjzuu-portrait.jpg" alt="Action Movie"></div>
+            <div class="movie" data-category="thriller"><img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-MjUsIEFwciAyMDI1,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00433878-skhrsnfnyw-portrait.jpg" alt="Action Movie"></div>
+
+         <button class="scroll-btn right-btn" onclick="scrollMovies(1)">&#10095;</button>
+        </section>
+        
+    </section>
+    <button class="chatbot-btn" onclick="toggleChatbot()"><img src="bot-message-square.png" alt=""></button>
+
+    <!-- Chatbot Section -->
+    <section id="chatbot" class="hidden">
+        <div class="chatbot-container">
+            <div class="chat-header">ChatBot</div>
+            <div class="chat-body" id="chat-body"></div>
+            <div class="chat-input">
+                <input type="text" id="user-input" placeholder="Type a message...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </section>
+    <section class="community-section">
+        <h2>Join the Movie<span style="color: red;">Buzz</span> Community</h2>
+        <p>Share your favorite movies and discuss with others!</p>
+    
+        <div class="share-buttons">
+            <button class="share-btn fb-share" onclick="shareOnFacebook()">Facebook</button>
+            <button class="share-btn twitter-share" onclick="shareOnTwitter()">Twitter</button>
+            <button class="share-btn whatsapp-share" onclick="shareOnWhatsApp()">Instagram</button>
+        </div>
+        <footer>
+            <p>&copy; 2025 MovieBuzz. All Rights Reserved.</p>
+            <p>Bringing the best movie experience to you. Book tickets hassle-free and enjoy the show!</p>
+        </footer>
+        
+        
+    </section>
+    
+    
+
+    <script src="homepage.js"></script>
+</body>
+</html>
