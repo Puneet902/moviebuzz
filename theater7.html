@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theater List - Hyderabad</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .theater-list {
+            max-width: 80%;
+            margin: 0 auto;
+        }
+
+        .theater {
+            background-color: #1e1e1e;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .theater h2 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #f6f5f8;
+        }
+
+        .theater p {
+            margin: 5px 0 0;
+            color: #cfcfcf;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px 5px 0 0;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            color: #ffffff;
+            transition: background-color 0.3s ease;
+        }
+
+        .button.book-now {
+            background-color: #6200ea;
+        }
+
+        .button.info {
+            background-color: #03dac6;
+        }
+
+        .button:hover {
+            opacity: 0.9;
+        }
+
+        .button.book-now:hover {
+            background-color: #3700b3;
+        }
+
+        .button.info:hover {
+            background-color: #018786;
+        }
+    </style>
+</head>
+<body>
+
+       <h1 style="text-align: center;">Movie<span style="color:red;">Buzz</span></h1>
+    <div class="theater-list">
+        <div class="theater">
+            <h2>AMB Cinemas: Gachibowli</h2>
+            <button class="button book-now">Book Now</button>
+            <button class="button info" onclick="openGoogleMaps('AMB+Cinemas+Gachibowli+Hyderabad')">Info</button>
+        </div>
+
+        <div class="theater">
+            <h2>Prose de Multiplex: Hyderabad</h2>
+           <a href="/seet7.html"><button class="button book-now">Book Now</button></a>
+            <button class="button info" onclick="openGoogleMaps('Prose+de+Multiplex+Hyderabad')">Info</button>
+        </div>
+
+        <div class="theater">
+            <h2>Asian Lakshmikala Cinepride: Moosapet</h2>
+            <a href="/seet7.html"><button class="button book-now">Book Now</button></a>
+            <button class="button info" onclick="openGoogleMaps('Asian+Lakshmikala+Cinepride+Moosapet+Hyderabad')">Info</button>
+        </div>
+
+        <div class="theater">
+            <h2>PVR: Nexus Mall Kukatpally, Hyderabad</h2>
+            <a href="/seet7.html"> <button class="button book-now">Book Now</button></a>
+            <button class="button info" onclick="openGoogleMaps('PVR+Nexus+Mall+Kukatpally+Hyderabad')">Info</button>
+        </div>
+
+        <div class="theater">
+            <h2>Aparna Cinemas: Nallagandia</h2>
+            <a href="/seet7.html"> <button class="button book-now">Book Now</button></a>
+            <button class="button info" onclick="openGoogleMaps('Aparna+Cinemas+Nallagandia+Hyderabad')">Info</button>
+        </div>
+
+        <div class="theater">
+            <h2>Inox: GVK One Mall, Hyderabad</h2>
+            <a href="/seet7.html"> <button class="button book-now">Book Now</button></a>
+            <button class="button info" onclick="openGoogleMaps('Inox+GVK+One+Mall+Hyderabad')">Info</button>
+        </div>
+
+        <div class="theater">
+            <h2>Cinepolis: Forum Sujana Mall, Hyderabad</h2>
+            <a href="/seet7.html"> <button class="button book-now">Book Now</button></a>
+            <button class="button info" onclick="openGoogleMaps('Cinepolis+Forum+Sujana+Mall+Hyderabad')">Info</button>
+        </div>
+    </div>
+
+    <script>
+        function openGoogleMaps(location) {
+            const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${location}`;
+            window.open(mapsUrl, '_blank');
+        }
+    </script>
+</body>
+</html>

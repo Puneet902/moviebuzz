@@ -1,6 +1,4 @@
-document.querySelector('.sign-in').addEventListener('click', function() {
-    alert('Sign-in functionality coming soon!');
-});
+
 
 // Movie Filtering Logic
 const categoryButtons = document.querySelectorAll('.category-btn');
