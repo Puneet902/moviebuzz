@@ -130,7 +130,7 @@ input {
 .banner-slider {
     display: flex;
     width: max-content;
-    animation: circular-scroll 15s linear infinite;
+    animation: circular-scroll 10s linear infinite;
 }
 
 .banner-slider img {
