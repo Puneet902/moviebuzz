@@ -127,6 +127,7 @@ input {
     white-space: nowrap;
 }
 
+
 .banner-slider {
     display: flex;
     width: max-content;
@@ -138,6 +139,8 @@ input {
     height: 300px;
     border-radius: 10px;
     margin-right: 10px;
+    box-shadow: 0px 2px 15px rgba(253, 254, 255, 0.2);
+    
 }
 
 /* Infinite Circular Scrolling Effect */
