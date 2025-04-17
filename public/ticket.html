@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MovieBuzz - Your Ticket</title>
+  <style>
+    /* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  /* Container for the ticket details */
+  #ticket-container {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px;
+    text-align: center;
+  }
+  
+  /* Heading for the ticket */
+  #ticket-container h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  /* Styling for the ticket details */
+  #ticket-details {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  /* Label styling */
+  #ticket-details p {
+    margin: 8px 0;
+  }
+  
+  #ticket-details p strong {
+    color: #333;
+    font-weight: bold;
+  }
+  
+  /* Button styling */
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Error message styling */
+  #error-message {
+    color: red;
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  
+  </style>
+</head>
+<body>
+
+  <h1>MovieBuzz</h1>
+  <h2>Your Movie Ticket</h2>
+
+  <div id="ticket-details">
+    <!-- Ticket details will be displayed here -->
+  </div>
+
+  <script>
+    // Fetch the latest booking details from the server
+    fetch('http://localhost:3003/get-latest-booking')
+  .then(response => {
+    console.log('Response Status:', response.status);  // Log the status
+    if (!response.ok) {
+      throw new Error('Failed to fetch booking details');
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('Booking Data:', data);
+    if (data.success && data.booking) {
+      const booking = data.booking;
+      const ticketDetails = `
+        <p><strong>Movie Name:</strong> ${booking.movie_name}</p>
+        <p><strong>Seat Number:</strong> ${booking.seat_number}</p>
+        <p><strong>Total Amount:</strong> ₹${booking.total_amount}</p>
+        <p><strong>Show Time:</strong> ${booking.show_time}</p>
+        <p><strong>Show Date:</strong> ${booking.show_date}</p>
+        <button onclick="downloadTicket()">Download Ticket</button>
+      `;
+      document.getElementById('ticket-details').innerHTML = ticketDetails;
+    } else {
+      document.getElementById('ticket-details').innerHTML = '<p>No booking details available.</p>';
+    }
+  })
+  .catch(error => {
+    console.error('Error fetching booking details:', error);
+    document.getElementById('ticket-details').innerHTML = '<p>Failed to load booking details. Please try again later.</p>';
+  });
+
+  </script>
+
+</body>
+</html>

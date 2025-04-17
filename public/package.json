@@ -1,0 +1,26 @@
+{
+  "name": "movieproject",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Puneet902/moviebuzz.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Puneet902/moviebuzz/issues"
+  },
+  "homepage": "https://github.com/Puneet902/moviebuzz#readme",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.0"
+  }
+}

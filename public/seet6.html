@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seat Booking</title>
+    <link rel="stylesheet" href="seet.css">
+    <script src="seet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+
+</head>
+<body>
+    
+    <div class="main-wrapper">
+        <h1>Movie<span style="color: red;">Buzz</span></h1>
+        <!-- Calendar & Time Slots -->
+        <div class="calendar-container">
+            <button class="arrow" onclick="prevDay()" id="prevArrow">&#9665;</button>
+            <div class="days" id="daysContainer"></div>
+            <button class="arrow" onclick="nextDay()">&#9655;</button>
+            
+            <div class="time-slot-container">
+                <div class="time-slots">
+                    <button class="time-slot" onclick="selectTime(this)">6:30 AM</button>
+                    <button class="time-slot" onclick="selectTime(this)">10:00 AM</button>
+                    <button class="time-slot" onclick="selectTime(this)">1:30 PM</button>
+                    <button class="time-slot" onclick="selectTime(this)">5:30 PM</button>
+                    <button class="time-slot" onclick="selectTime(this)">10:30 PM</button>
+                </div>
+
+                <!-- Profile Dropdown -->
+                <div class="profile-container">
+                    <button class="profile-btn" onclick="toggleDropdown()">👤 Profile</button>
+                    <div class="profile-dropdown hidden" id="profileDropdown">
+                        <a href="ticket.html" >🎟️ Your Tickets</a>
+                        <a href="help.html" >❓ Help</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-container">
+            <div class="poster-container">
+                <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-image,i-discovery-catalog@@icons@@star-icon-202203010609.png,lx-24,ly-615,w-29,l-end:l-text,ie-Ny8xMCAgOC4ySyBWb3Rlcw%3D%3D,fs-29,co-FFFFFF,ly-612,lx-70,pa-8_0_0_0,l-end/et00399765-lxpecsqysh-portrait.jpg" alt="Movie Poster">
+                <div>
+                    <button class="play-trailer">Play Trailer</button>
+                </div>
+            </div>
+            <div class="container">
+                <h3>All eyes this way please!</h3>
+                <div class="screen-container">
+                    <div class="screen-curve"></div>
+                </div>
+                <div id="seatContainer" class="seats"></div>
+            </div>
+            <div class="seat-info">
+                <h3>Selected Seats:</h3>
+                <p id="selectedSeats">None</p>
+                <h3>Total Price:</h3>
+                <p id="totalPrice">Rs. 0</p>
+                <button class="book-button" id="bookNow" onclick="book()">Book Now</button>
+
+                <div class="ticket">
+                    <div class="ticket-header">
+                        <h3>ASIAN CINEMA PRESENTS</h3>
+                        <h1 class="moviename">Captain America: Brave New World</h1>
+                    </div>
+                    <div class="ticket-details">
+                        <div class="ticket-info">
+                            <p><strong>SCREEN</strong> <span id="screen" style="color: black;">" "</span></p>
+                            <p><strong>ROW</strong> <span id="row" style="color: black;">" "</span></p>
+                            <p><strong>SEAT</strong> <span id="seat" style="color: black;">" "</span></p>
+                        </div>
+                        <div class="ticket-info">
+                            <p><strong>PRICE</strong> <span id="price" style="color: black;">" "</span></p>
+                            <p><strong>DATE</strong> <span id="date" style="color: black;">" "</span></p>
+                            <p><strong>TIME</strong> <span id="time" style="color: black;">" "</span></p>
+                        </div>
+                    </div>
+                    <div class="ticket-barcode">
+                        <div class="barcode"></div>
+                    </div>
+
+                </div>
+                    <button id="download" style="display: none;" onclick="generatePDF()">Download Ticket</button>
+              
+            </div>
+        </div>
+        <button class="chatbot-btn" onclick="toggleChatbot()"><img src="bot-message-square.png" alt=""></button>
+        <!-- Chatbot Section -->
+        <section id="chatbot" class="hidden">
+            <div class="chatbot-container">
+                <div class="chat-header">ChatBot</div>
+                <div class="chat-body" id="chat-body"></div>
+                <div class="chat-input">
+                    <input type="text" id="user-input" placeholder="Type a message...">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        let today = new Date();
+        today.setHours(0, 0, 0, 0);
+        let startDate = new Date(today);
+        let selectedDate = today;
+        let selectedTime = null;
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        
+        function generateCalendar() {
+            const daysContainer = document.getElementById("daysContainer");
+            daysContainer.innerHTML = "";
+            for (let i = 0; i < 5; i++) {
+                let date = new Date(startDate);
+                date.setDate(date.getDate() + i);
+                let dayElement = document.createElement("button");
+                dayElement.className = "day";
+                dayElement.innerHTML = `${date.getDate()} ${monthNames[date.getMonth()]}`;
+                dayElement.onclick = () => selectDate(date, dayElement);
+                if (selectedDate && selectedDate.getTime() === date.getTime()) {
+                    dayElement.classList.add("selected");
+                }
+                daysContainer.appendChild(dayElement);
+            }
+            document.getElementById("prevArrow").style.visibility = startDate <= today ? "hidden" : "visible";
+        }
+
+        function selectDate(date, element) {
+            selectedDate = date;
+            document.querySelectorAll(".day").forEach(day => day.classList.remove("selected"));
+            element.classList.add("selected");
+            console.log("Selected Date:", date.getDate(), monthNames[date.getMonth()]);
+        }
+
+        function selectTime(element) {
+            document.querySelectorAll(".time-slot").forEach(slot => slot.classList.remove("selected"));
+            element.classList.add("selected");
+            selectedTime = element.innerText;
+            console.log("Selected Time:", selectedTime);
+        }
+
+        function prevDay() {
+            if (startDate > today) {
+                startDate.setDate(startDate.getDate() - 1);
+                generateCalendar();
+            }
+        }
+        function nextDay() {
+            startDate.setDate(startDate.getDate() + 1);
+            generateCalendar();
+        }
+        
+        generateCalendar();
+            // Profile Dropdown Logic
+            function toggleDropdown() {
+                document.getElementById("profileDropdown").classList.toggle("hidden");
+            }
+    
+            document.addEventListener("click", function(event) {
+                if (!event.target.closest(".profile-container")) {
+                    document.getElementById("profileDropdown").classList.add("hidden");
+                }
+            });
+    
+            function showTickets() {
+                alert("📜 Showing your booked tickets...");
+            }
+    
+            function showHelp() {
+                alert("❓ Need help? Contact support at support@example.com");
+            }
+    
+            function signOut() {
+                alert("🚪 Signed out successfully!");
+            }
+    </script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MovieBuzz - Help</title>
+  <style>
+    /* Global styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f7f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Container for help page */
+    #help-container {
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      width: 100%;
+      max-width: 800px;
+      border-radius: 8px;
+      margin: 20px;
+    }
+
+    /* Header for the help page */
+    h1 {
+      font-size: 36px;
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* FAQ Section */
+    #faq {
+      margin-bottom: 30px;
+    }
+
+    #faq h2 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .faq-item {
+      margin-bottom: 15px;
+    }
+
+    .faq-item h3 {
+      font-size: 20px;
+      color: #007bff;
+    }
+
+    .faq-item p {
+      font-size: 16px;
+      color: #555;
+    }
+
+    /* Contact Support Form */
+    #contact-support {
+      margin-bottom: 30px;
+    }
+
+    #contact-support h2 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    #contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    #contact-form input, #contact-form textarea {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #contact-form button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #contact-form button:hover {
+      background-color: #0056b3;
+    }
+
+    #form-feedback {
+      margin-top: 20px;
+      color: green;
+    }
+
+    /* Helpline Section */
+    #helpline {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    #helpline h2 {
+      font-size: 24px;
+      color: #333;
+    }
+
+    #helpline p {
+      font-size: 18px;
+      color: #555;
+    }
+
+    #helpline strong {
+      color: #007bff;
+    }
+  </style>
+</head>
+<body>
+  <div id="help-container">
+    <h1>How can we help you?</h1>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <h3>How do I book a ticket?</h3>
+        <p>You can book a ticket by selecting a movie and showtime from the homepage. Once you've selected your seat, just complete the payment process.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I cancel my booking?</h3>
+        <p>Unfortunately, cancellations are not possible once the ticket is booked. Please make sure the details are correct before confirming the booking.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How do I get a refund?</h3>
+        <p>Refunds are processed under certain conditions. Please contact our support team for more details.</p>
+      </div>
+    </section>
+
+    <!-- Contact Support Section -->
+    <section id="contact-support">
+      <h2>Contact Support</h2>
+      <form id="contact-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+      <div id="form-feedback"></div>
+    </section>
+
+    <!-- Helpline Number Section -->
+    <section id="helpline">
+      <h2>Need Immediate Help?</h2>
+      <p>Call our support helpline at <strong>+1-800-123-4567</strong> for immediate assistance.</p>
+    </section>
+  </div>
+
+  <script>
+    // Handle contact form submission
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      // Simulate sending the message
+      setTimeout(function() {
+        document.getElementById('form-feedback').innerHTML = `<p>Thank you, ${name}! Your message has been sent successfully.</p>`;
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
