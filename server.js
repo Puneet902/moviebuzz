@@ -84,8 +84,8 @@ app.post('/save-ticket', (req, res) => {
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'moviebuzz439@gmail.com',
-    pass: 'Movie_Buzz69',
+    user: 'your email',
+    pass: 'your password',
   },
 });
 
@@ -104,7 +104,7 @@ app.post('/send-ticket-pdf', (req, res) => {
 
   // Set up the email options
   const mailOptions = {
-    from: 'moviebuzz439@gmail.com',
+    from: 'your email',
     to: userEmail,
     subject: 'Your Movie Ticket',
     text: 'Please find your movie ticket attached.',
