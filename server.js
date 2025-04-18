@@ -6,10 +6,14 @@ const nodemailer = require('nodemailer');
 const fs = require('fs');
 const PDFDocument = require('pdfkit');
 const cors = require('cors');
+require('dotenv').config();
+const upload = multer({ dest: 'uploads/' });
+const nodemailer = require('nodemailer');
+const { decodeBase64 } = require('./utils');
 app.use(cors());  // Allow cross-origin requests
-
+app.use(bodyParser.json());
 const app = express();
-const port = 3003;
+const port = 3008;
 
 // Middleware
 app.use(express.json());
@@ -77,26 +81,54 @@ app.post('/save-ticket', (req, res) => {
       res.status(200).json({ success: true, message: 'Ticket booked!' });
   });
 });
-app.get('/get-latest-booking', (req, res) => {
-  const sql = 'SELECT * FROM bookings ORDER BY booking_id DESC LIMIT 1';
-  db.query(sql, (err, result) => {
-    if (err) {
-      console.error('❌ DB error:', err);
-      return res.status(500).json({ success: false, message: 'DB Error' });
-    }
-
-    console.log('Query result:', result);  // Log the query result
-
-    if (result.length > 0) {
-      console.log('Latest booking details:', result[0]);
-      res.status(200).json({ success: true, booking: result[0] });
-    } else {
-      console.log('No bookings found');
-      res.status(404).json({ success: false, message: 'No booking found' });
-    }
-  });
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'moviebuzz439@gmail.com',
+    pass: 'Movie_Buzz69',
+  },
 });
 
+// Function to send the PDF via email
+app.post('/send-ticket-pdf', (req, res) => {
+  const { pdfBase64 } = req.body;
+
+  // Decode the PDF from Base64
+  const pdfBuffer = decodeBase64(pdfBase64);
+  const pdfPath = path.join(__dirname, 'ticket.pdf');
+  
+  fs.writeFileSync(pdfPath, pdfBuffer); // Save PDF file temporarily
+
+  // Get user's email (assume you fetch it from the database)
+  const userEmail = getUserEmailFromDB(); // Replace with actual database query
+
+  // Set up the email options
+  const mailOptions = {
+    from: 'moviebuzz439@gmail.com',
+    to: userEmail,
+    subject: 'Your Movie Ticket',
+    text: 'Please find your movie ticket attached.',
+    attachments: [
+      {
+        filename: 'ticket.pdf',
+        path: pdfPath,
+      },
+    ],
+  };
+
+  // Send email
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error('Error sending email:', error);
+      return res.status(500).json({ success: false, message: 'Failed to send email' });
+    }
+    console.log('Email sent:', info.response);
+    res.status(200).json({ success: true, message: 'Ticket sent to email' });
+    
+    // Remove the temporary PDF file after sending
+    fs.unlinkSync(pdfPath);
+  });
+});
 // Start server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

@@ -148,7 +148,7 @@ function generateReply(message) {
     
     return replies[message.toLowerCase()] || "I'm not sure how to respond to that.";
 }
-function book() {
+function book() { 
     let confirmBooking = confirm("Press OK to confirm your booking");
 
     if (confirmBooking) {
@@ -158,14 +158,18 @@ function book() {
         const price = document.getElementById("price").textContent.replace("Rs.", "").trim();
         const date = document.getElementById("date").textContent.trim();
         const time = document.getElementById("time").textContent.trim();
-        const movieName = document.querySelector(".moviename")?.textContent.trim() || "Example Movie"; // Dynamic movie name
+
+        // ✅ Get movie details from the movie-title class (first one found or add logic to pick selected)
+        const movieElement = document.querySelector(".movie-title");
+        const movieName = movieElement ? movieElement.textContent.trim() : "Unknown Movie";
+        const category = movieElement ? movieElement.getAttribute("data-category") : "uncategorized";
 
         if (!seat || !row || !price || !date || !time) {
             alert("Please select a seat and time before booking.");
             return;
         }
 
-        fetch('/save-ticket', {
+        fetch('http://localhost:3008/save-ticket', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -176,23 +180,26 @@ function book() {
                 seat_number: seat,
                 total_amount: parseInt(price),
                 show_time: time,
-                show_date: date
+                show_date: date,
+                category: category
             }),
         })
+        
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                showPaymentPopup(); // Show the payment success popup
+                showPaymentPopup();
                 document.getElementById("download").style.display = "inline";
             } else {
                 alert(data.message);
             }
         })
         .catch(err => {
-            console.error(err);
+            console.error("Booking error:", err);
         });
     }
 }
+
 function showPaymentPopup() {
     const popup = document.createElement("div");
     popup.innerHTML = `
@@ -217,6 +224,9 @@ function showPaymentPopup() {
 }
 
 
+  
+
+  
 
 
 function generatePDF() {
@@ -231,8 +241,69 @@ function generatePDF() {
         let imgHeight = (canvas.height * imgWidth) / canvas.width; // Scale Image Proportionally
 
         doc.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight); // Add Image to PDF
-        doc.save("Movie_Ticket.pdf"); // Download PDF
+
+        // Convert the PDF to a Base64 string
+        let pdfBase64 = doc.output('datauristring');
+
+        // Send the Base64 string to the server to email it
+        fetch('/send-ticket-pdf', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ pdfBase64 })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message); // Log success message
+        })
+        .catch(error => {
+            console.error('Error sending PDF to server:', error);
+        });
     });
 }
 
 
+function generatePDFAndSendEmail() {
+    const { jsPDF } = window.jspdf; 
+    let ticketElement = document.querySelector(".ticket"); 
+
+    html2canvas(ticketElement, { scale: 2 }).then(canvas => {
+        let imgData = canvas.toDataURL("image/png"); 
+        let doc = new jsPDF('p', 'mm', 'a4'); 
+
+        let imgWidth = 190; 
+        let imgHeight = (canvas.height * imgWidth) / canvas.width; 
+
+        doc.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight); 
+
+        let pdfBase64 = doc.output('datauristring');
+
+        // Fetch the most recent user's email
+        fetch('http://localhost:3008/get-latest-user-email')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Send the Base64 string to the server to email it
+                    fetch('/send-ticket-pdf', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            email: data.email, // Get the email from the response
+                            pdfBase64: pdfBase64
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data.message); // Log success message
+                    })
+                    .catch(error => {
+                        console.error('Error sending PDF to server:', error);
+                    });
+                } else {
+                    console.error('Failed to fetch user email');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching user email:', error);
+            });
+    });
+}
