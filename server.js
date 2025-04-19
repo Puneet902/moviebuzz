@@ -2,21 +2,27 @@ const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const path = require('path');
-const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer'); // ✅ Only once
 const fs = require('fs');
 const PDFDocument = require('pdfkit');
 const cors = require('cors');
+const multer = require('multer'); // <- also missing in your code
 require('dotenv').config();
+// utils.js
+function decodeBase64(base64String) {
+  return Buffer.from(base64String, 'base64');
+}
+
+module.exports = { decodeBase64 };
+
 const upload = multer({ dest: 'uploads/' });
-const nodemailer = require('nodemailer');
-const { decodeBase64 } = require('./utils');
-app.use(cors());  // Allow cross-origin requests
-app.use(bodyParser.json());
+
 const app = express();
-const port = 3008;
+const port = 3010;
 
 // Middleware
-app.use(express.json());
+app.use(cors());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 

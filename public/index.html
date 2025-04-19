@@ -248,7 +248,7 @@
           // })
       
           // ✅ REPLACE WITH this Node.js API call
-          fetch("http://localhost:3008/save-user", {
+          fetch("http://localhost:3010/save-user", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -323,7 +323,7 @@
     const phone = "+91" + document.getElementById("phone-number").value;
   
     // Save phone number to backend without OTP verification
-    fetch("http://localhost:3000/save-user", {
+    fetch("http://localhost:3010/save-user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

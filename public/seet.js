@@ -160,7 +160,7 @@ function book() {
         const time = document.getElementById("time").textContent.trim();
 
         // ✅ Get movie details from the movie-title class (first one found or add logic to pick selected)
-        const movieElement = document.querySelector(".movie-title");
+        const movieElement = document.querySelector(".moviename");
         const movieName = movieElement ? movieElement.textContent.trim() : "Unknown Movie";
         const category = movieElement ? movieElement.getAttribute("data-category") : "uncategorized";
 
@@ -169,7 +169,7 @@ function book() {
             return;
         }
 
-        fetch('http://localhost:3008/save-ticket', {
+        fetch('http://localhost:3010/save-ticket', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -278,7 +278,7 @@ function generatePDFAndSendEmail() {
         let pdfBase64 = doc.output('datauristring');
 
         // Fetch the most recent user's email
-        fetch('http://localhost:3008/get-latest-user-email')
+        fetch('http://localhost:3010/get-latest-user-email')
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
